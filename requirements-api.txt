@@ -1,0 +1,18 @@
+# FastAPI Requirements
+fastapi>=0.104.1
+uvicorn[standard]>=0.24.0
+python-multipart>=0.0.6
+pillow>=10.0.0
+
+# Existing ML Requirements
+tensorflow>=2.18.0
+opencv-python
+matplotlib
+numpy
+scikit-learn
+pandas
+seaborn
+
+# Optional: for development
+jupyter
+ipykernel
