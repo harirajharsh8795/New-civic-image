@@ -87,7 +87,9 @@ async def health_check():
     """Health check endpoint"""
     return {
         "status": "healthy",
-        "model_loaded": model is not None
+        "model_loaded": model is not None,
+        "timestamp": __import__('datetime').datetime.now().isoformat(),
+        "port": os.environ.get("PORT", "8000")
     }
 
 @app.post("/predict")
@@ -210,12 +212,28 @@ async def get_classes():
     }
 
 if __name__ == "__main__":
+    # Railway deployment startup
+    print("🚂 Starting Civic Image Classification API on Railway")
+    print(f"🐍 Python version: {__import__('sys').version}")
+    
+    # Check if model file exists
+    if not os.path.exists("best_model.h5"):
+        print("❌ Error: best_model.h5 not found!")
+        exit(1)
+    
+    model_size = os.path.getsize("best_model.h5") / (1024 * 1024)
+    print(f"✅ Model found: best_model.h5 ({model_size:.1f} MB)")
+    
+    # Get port from environment
     try:
         port = int(os.environ.get("PORT", 8000))
     except (ValueError, TypeError):
         port = 8000
         
-    print(f"Starting server on port {port}")
+    print(f"🚀 Starting server on port {port}")
+    print(f"🌐 Server will be available at: http://0.0.0.0:{port}")
+    
+    # Start the server
     uvicorn.run(
         "main:app",
         host="0.0.0.0",
