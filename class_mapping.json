@@ -1,0 +1,35 @@
+{
+  "class_names": [
+    "garbage",
+    "open_manhole",
+    "potholes",
+    "road_normal",
+    "streetlight bad",
+    "streetlight good"
+  ],
+  "class_indices": {
+    "garbage": 0,
+    "open_manhole": 1,
+    "potholes": 2,
+    "road_normal": 3,
+    "streetlight bad": 4,
+    "streetlight good": 5
+  },
+  "total_classes": 6,
+  "api_classes": [
+    "garbage",
+    "open_manhole",
+    "potholes",
+    "road_normal",
+    "streetlight bad",
+    "streetlight good"
+  ],
+  "directory_structure": [
+    "garbage",
+    "open_manhole",
+    "potholes",
+    "road_normal",
+    "streetlight bad",
+    "streetlight good"
+  ]
+}

@@ -8,6 +8,7 @@ import io
 import logging
 from typing import Dict, Any
 import uvicorn
+import os
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -150,8 +151,8 @@ async def batch_predict(files: list[UploadFile] = File(...)):
     if model is None:
         raise HTTPException(status_code=500, detail="Model not loaded")
     
-    if len(files) > 10:  # Limit batch size
-        raise HTTPException(status_code=400, detail="Maximum 10 images allowed per batch")
+    if len(files) > 5:  # Reduced for Railway limits
+        raise HTTPException(status_code=400, detail="Maximum 5 images allowed per batch")
     
     results = []
     
@@ -209,10 +210,10 @@ async def get_classes():
     }
 
 if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8000))
     uvicorn.run(
         "main:app",
         host="0.0.0.0",
-        port=8000,
-        reload=True,
+        port=port,
         log_level="info"
     )
