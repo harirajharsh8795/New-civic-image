@@ -26,8 +26,8 @@ COPY best_model.h5 .
 RUN useradd -m -u 1000 railwayuser && chown -R railwayuser:railwayuser /app
 USER railwayuser
 
-# Expose port (Railway will set PORT env var)
-EXPOSE $PORT
+# Expose port
+EXPOSE 8000
 
 # Command to run the application
-CMD ["sh", "-c", "gunicorn main:app --workers 1 --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:$PORT"]
+CMD ["python", "main.py"]
